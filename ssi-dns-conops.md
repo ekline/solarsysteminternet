@@ -20,7 +20,7 @@
 
 * rough sketch  
 * not battle-tested  
-* the various **NOTE:**s sprinkled throughout represent future work or discussion items
+* the various **NOTE:** s sprinkled throughout represent future work or discussion items
 
 # Assumptions
 
