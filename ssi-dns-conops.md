@@ -4,8 +4,15 @@
 [Rick Taylor](mailto:rtaylor@aalyria.com)
 
 
-# Background
+# Motivation
 
+As networked devices move futher out into the Solar System there will be an increase in the number of enclaves of synchronous connectivity using Internet technologies that rely upon highly constrained links to reach other such enclaves.  Within each enclave, users expect the full Internet experience with low-latency access to local services, real-time applications, and immediate resource discovery.  Reaching resources within other enclaves, however, will generally involve significant delays and requires different asynchronous communication operations to inform and assist users and applications.
+
+As an example, consider a Mars-local Internet comprising several satellites, rovers, and one or more research stations.  A researcher at one station should be able to seemlessly initiate a audio call with a peer in another Martian base, view real-time video from a rover relayed via Martian satellites, and access local CDN-managed resources.  The same researcher, with minimal alternation in work flow, should also be able to request data from websites hosted on Earth, send email to a colleague within the same organization (and ideally the same domain name) who is currently working at a lunar base, and issue commands advancing a science mission to a satellite orbiting Europa.  The former operations are all feasible with Internet technologies today, the latter are largely possible with DTN network archtictures encapsulating traffic in BPv7 bundles (building a Bundle Protocol overlay), however the user experience shifting between these two modalities is not presently seemless.
+
+This document outlines a hybrid architecture with some changes to DNS infrastructure and operational practices to seamlessly bridge synchronous and asynchronous network connectivity.  DNS operations today generally assume global reachability and relatively quick response times, but DTN-connected enclaves will require new Resource Record types, resolution strategies, and network signaling that can handle temporal unavailability of authoritative servers, maintain coherent namespace views across disconnected periods, and provide intelligent hints about resource availability windows.  Additionally, applications and services need to be designed with "enclave-aware" behaviors, automatically adapting their functionality based on current connectivity state while maintaining transparent user experiences that gracefully degrade when crossing enclave boundaries.
+
+# Requirements
 * The application should be considered unknown because DNS generally doesn't know if a given A/AAAA lookup is for a bespoke service, HTTPS, or SMTP post-MX-lookup-fail, or …  
 * Browsers have shifted to preferring looking up HTTPS and SVCB Resource Resources (RR)s  
   * [RFC 9460](https://datatracker.ietf.org/doc/html/rfc9460)  
